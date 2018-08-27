@@ -1,0 +1,50 @@
+# Copyright (C) 2018 Bogo Date
+# This file is distributed under the same license as the Bogo Date package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Bogo Date 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bogodate\n"
+"POT-Creation-Date: 2018-04-26 07:19:59+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Ko Takagi <takagi@go-sign.info>\n"
+"Language-Team: Ko Takagi <takagi@go-sign.info>\n"
+
+#: bogodate.php:20
+msgid "Sorry, Bogo is not installed."
+msgstr ""
+
+#: src/BogoDate/Admin.php:35 src/BogoDate/Admin.php:36
+#: src/BogoDate/Admin.php:55
+msgid "Date Format"
+msgstr ""
+
+#: src/BogoDate/Admin.php:77
+msgid "Time Format"
+msgstr ""
+
+#: src/BogoDate/Admin.php:118
+msgid "Date Format Settings"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Bogo Date"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/tarosky/bogodate"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Date format as a Bogo extension for WordPress."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "tarosky, ko31"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://tarosky.co.jp/"
+msgstr ""
