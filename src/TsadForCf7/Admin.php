@@ -59,6 +59,14 @@ final class Admin
         );
 
         add_settings_field(
+            'is_available',
+            __( 'Availability', 'tsad-for-cf7' ),
+            array( $this, 'a8_is_available_callback' ),
+            $this->prefix,
+            'a8_settings'
+        );
+
+        add_settings_field(
             'landing_code',
             __( 'Landing page code', 'tsad-for-cf7' ),
             array( $this, 'a8_landing_code_callback' ),
@@ -95,6 +103,16 @@ final class Admin
         echo '<p>' . __( 'This is settings for A8.net', 'tsad-for-cf7' ) . '</p>';
     }
 
+	public function a8_is_available_callback()
+	{
+        $a8_is_available = isset( $this->options['a8_is_available'] ) ? $this->options['a8_is_available'] : '';
+		?>
+		<label for="is_available">
+		<input name="<?php echo $this->prefix;?>[a8_is_available]" type="checkbox" id="is_available" value="1" <?php checked( '1', $a8_is_available ); ?> />
+		<?php _e( 'Can available', 'tsad-for-cf7' ); ?></label>
+		<?php
+    }
+
 	public function a8_landing_code_callback()
 	{
         $a8_landing_code = isset( $this->options['a8_landing_code'] ) ? $this->options['a8_landing_code'] : '';
@@ -110,7 +128,10 @@ final class Admin
 		<p>
 			<textarea name="<?php echo $this->prefix;?>[a8_conversion_code]" rows="10" cols="50" id="a8_conversion_code" class="large-text"><?php echo $a8_conversion_code;?></textarea>
 		</p>
-		<p class="description"><code>[flamingo_id]</code>:Flamingo ID</p>
+		<p class="description">
+			<code>[flamingo_id]</code>
+			<?php _e( ':Flamingo ID', 'tsad-for-cf7' ); ?>
+		</p>
 		<?php
     }
 
