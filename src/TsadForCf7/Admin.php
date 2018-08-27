@@ -83,6 +83,14 @@ final class Admin
         );
 
         add_settings_field(
+            'contact_posts',
+            __( 'Contact post id', 'tsad-for-cf7' ),
+            array( $this, 'a8_contact_posts_callback' ),
+            $this->prefix,
+            'a8_settings'
+        );
+
+        add_settings_field(
             'conversion_posts',
             __( 'Conversion post id', 'tsad-for-cf7' ),
             array( $this, 'a8_conversion_posts_callback' ),
@@ -132,6 +140,14 @@ final class Admin
 			<code>[flamingo_id]</code>
 			<?php _e( ':Flamingo ID', 'tsad-for-cf7' ); ?>
 		</p>
+		<?php
+    }
+
+	public function a8_contact_posts_callback()
+	{
+        $a8_contact_posts = isset( $this->options['a8_contact_posts'] ) ? $this->options['a8_contact_posts'] : '';
+		?>
+		<input name="<?php echo $this->prefix;?>[a8_contact_posts]" type="text" id="a8_contact_posts" value="<?php echo $a8_contact_posts;?>" class="regular-text">
 		<?php
     }
 
