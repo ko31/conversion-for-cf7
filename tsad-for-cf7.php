@@ -1,15 +1,15 @@
 <?php
 /**
- * Plugin Name:     tsad
+ * Plugin Name:     tsad-for-cf7
  * Plugin URI:
- * Description:
- * Author:
+ * Description:		An add-on plugin for the Contact Form 7 and Flamingo which measure any affiliates.
+ * Author:			ko31
  * Author URI:
- * Text Domain:     tsad
+ * Text Domain:     tsad-for-cf7
  * Domain Path:     /languages
- * Version:         1.0.0
+ * Version:         0.1.0
  *
- * @package         tsad
+ * @package         tsad-for-cf7
  */
 
 require_once( dirname( __FILE__ ) . '/vendor/autoload.php' );
