@@ -50,6 +50,30 @@ final class Admin
 			$this->prefix
 		);
 
+		// Basic
+        add_settings_section(
+            'basic_settings',
+            __( 'Basic settings', 'tsad-for-cf7' ),
+            array( $this, 'basic_section_callback' ),
+            $this->prefix
+        );
+
+        add_settings_field(
+            'contact_posts',
+            __( 'Contact post id', 'tsad-for-cf7' ),
+            array( $this, 'contact_posts_callback' ),
+            $this->prefix,
+            'basic_settings'
+        );
+
+        add_settings_field(
+            'conversion_posts',
+            __( 'Conversion post id', 'tsad-for-cf7' ),
+            array( $this, 'conversion_posts_callback' ),
+            $this->prefix,
+            'basic_settings'
+        );
+
 		// A8
         add_settings_section(
             'a8_settings',
@@ -82,22 +106,6 @@ final class Admin
             'a8_settings'
         );
 
-        add_settings_field(
-            'contact_posts',
-            __( 'Contact post id', 'tsad-for-cf7' ),
-            array( $this, 'a8_contact_posts_callback' ),
-            $this->prefix,
-            'a8_settings'
-        );
-
-        add_settings_field(
-            'conversion_posts',
-            __( 'Conversion post id', 'tsad-for-cf7' ),
-            array( $this, 'a8_conversion_posts_callback' ),
-            $this->prefix,
-            'a8_settings'
-        );
-
 		// TODO:もしも
 
 		// TODO:フェルマ
@@ -105,6 +113,27 @@ final class Admin
 		// TODO:アンガス
 
 	}
+
+	public function basic_section_callback()
+	{
+        echo '<p>' . __( 'This is basic settings', 'tsad-for-cf7' ) . '</p>';
+    }
+
+	public function contact_posts_callback()
+	{
+        $contact_posts = isset( $this->options['contact_posts'] ) ? $this->options['contact_posts'] : '';
+		?>
+		<input name="<?php echo $this->prefix;?>[contact_posts]" type="text" id="contact_posts" value="<?php echo $contact_posts;?>" class="regular-text">
+		<?php
+    }
+
+	public function conversion_posts_callback()
+	{
+        $conversion_posts = isset( $this->options['conversion_posts'] ) ? $this->options['conversion_posts'] : '';
+		?>
+		<input name="<?php echo $this->prefix;?>[conversion_posts]" type="text" id="conversion_posts" value="<?php echo $conversion_posts;?>" class="regular-text">
+		<?php
+    }
 
 	public function a8_section_callback()
 	{
@@ -140,22 +169,6 @@ final class Admin
 			<code>[flamingo_id]</code>
 			<?php _e( ':Flamingo ID', 'tsad-for-cf7' ); ?>
 		</p>
-		<?php
-    }
-
-	public function a8_contact_posts_callback()
-	{
-        $a8_contact_posts = isset( $this->options['a8_contact_posts'] ) ? $this->options['a8_contact_posts'] : '';
-		?>
-		<input name="<?php echo $this->prefix;?>[a8_contact_posts]" type="text" id="a8_contact_posts" value="<?php echo $a8_contact_posts;?>" class="regular-text">
-		<?php
-    }
-
-	public function a8_conversion_posts_callback()
-	{
-        $a8_conversion_posts = isset( $this->options['a8_conversion_posts'] ) ? $this->options['a8_conversion_posts'] : '';
-		?>
-		<input name="<?php echo $this->prefix;?>[a8_conversion_posts]" type="text" id="a8_conversion_posts" value="<?php echo $a8_conversion_posts;?>" class="regular-text">
 		<?php
     }
 
