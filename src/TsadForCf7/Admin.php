@@ -3,7 +3,7 @@
 namespace TsadForCf7;
 
 /**
- * Customize the list table on the admin screen.
+ * Customize the  admin screen.
  *
  * @package TsadForCf7
  */
