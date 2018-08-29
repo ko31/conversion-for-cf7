@@ -64,7 +64,9 @@ final class Action
 			//TODO: URLにnonceを付与
 
 			/**
+			 * Filters the conversion url to redirect
 			 *
+			 * @param string $url
 			 */
 			$url = apply_filters( 'tsad_form_cf7_conversion_url', $url );
 
