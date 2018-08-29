@@ -28,26 +28,59 @@ final class Action
 
 	public function register()
 	{
+        $this->options = get_option( $this->prefix );
+
+		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'wp_footer', array( $this, 'wp_footer' ) );
+	}
+
+	public function is_enabled()
+	{
+		if ( empty( $this->options['contact_posts'] ) ) {
+			return false;
+		}
+
+		return ( $this->options['contact_posts'] == get_the_ID() );
+	}
+
+	public function get_conversion_url()
+	{
+		return get_permalink( $this->options['conversion_posts'] );
+	}
+
+	public function init()
+	{
+		/**
+		 * Disable the JavaScript for the Contact Form 7.
+		 */
+		add_filter( 'wpcf7_load_js', '__return_false' );
+
+		/**
+		 * Redirect to the conversion page after Flamingo submitted.
+		 */
+		add_action( 'wpcf7_after_flamingo', function( $result ) {
+			$url = $this->get_conversion_url();
+
+			//TODO: URLにnonceを付与
+
+			/**
+			 *
+			 */
+			$url = apply_filters( 'tsad_form_cf7_conversion_url', $url );
+
+			if ( ! empty( $url ) ) {
+				wp_safe_redirect( esc_url_raw( $url, array( 'http', 'https' ) ), 302 );
+				exit;
+			}
+		}, 9999 );
 	}
 
 	public function wp_footer()
 	{
-        $this->options = get_option( $this->prefix );
-		?>
-		<script type="text/javascript">
-		console.log("test1");
-		console.log("<?php echo $this->prefix; ?>");
-		console.log("<?php echo $this->options['a8_contact_posts']; ?>");
-		document.addEventListener( 'wpcf7mailsent', function( event ) {
-			console.log("test2");
-			console.log(event.detail);
-			return;
-//			if ( '123' == event.detail.contactFormId ) {
-//				ga( 'send', 'event', 'Contact Form', 'submit' );
-//			}
-		}, false );
-		</script>
-		<?php
+		//TODO: 全ページのLPタグ設置
+
+
+		//TODO: コンバージョンページのタグ設定
+
 	}
 }
