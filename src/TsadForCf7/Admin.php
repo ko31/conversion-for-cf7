@@ -156,8 +156,8 @@ final class Admin
 			<textarea name="<?php echo $this->prefix;?>[a8_conversion_code]" rows="10" cols="50" id="a8_conversion_code" class="large-text"><?php echo $a8_conversion_code;?></textarea>
 		</p>
 		<p class="description">
-			<code>[flamingo_id]</code>
-			<?php _e( ':Flamingo ID', 'tsad-for-cf7' ); ?>
+			<code>[serial_number]</code>
+			<?php _e( ':Serial_number of Flamingo', 'tsad-for-cf7' ); ?>
 		</p>
 		<?php
     }

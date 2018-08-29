@@ -28,6 +28,7 @@ class TsadForCf7
 			TsadForCf7\Admin::get_instance()->register();
 		} else {
 			TsadForCf7\Action::get_instance()->register();
+			TsadForCf7\Module\A8::get_instance()->register();
 		}
 	}
 

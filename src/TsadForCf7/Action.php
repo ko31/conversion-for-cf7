@@ -31,16 +31,17 @@ final class Action
         $this->options = get_option( $this->prefix );
 
 		add_action( 'init', array( $this, 'init' ) );
-		add_action( 'wp_footer', array( $this, 'wp_footer' ) );
 	}
 
-	public function is_enabled()
+	public function is_contact()
 	{
 		if ( empty( $this->options['contact_posts'] ) ) {
 			return false;
 		}
 
-		return ( $this->options['contact_posts'] == get_the_ID() );
+		$url = ( empty( $_SERVER["HTTPS"] ) ? "http://" : "https://" )
+			. $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		return ( $this->options['contact_posts'] == url_to_postid( $url ) );
 	}
 
 	public function get_conversion_url()
@@ -50,6 +51,10 @@ final class Action
 
 	public function init()
 	{
+		if ( ! $this->is_contact() ) {
+			return;
+		}
+
 		/**
 		 * Disable the JavaScript for the Contact Form 7.
 		 */
@@ -59,9 +64,8 @@ final class Action
 		 * Redirect to the conversion page after Flamingo submitted.
 		 */
 		add_action( 'wpcf7_after_flamingo', function( $result ) {
-			$url = $this->get_conversion_url();
 
-			//TODO: URLにnonceを付与
+			$url = $this->get_conversion_url();
 
 			/**
 			 * Filters the conversion url to redirect
@@ -70,19 +74,15 @@ final class Action
 			 */
 			$url = apply_filters( 'tsad_form_cf7_conversion_url', $url );
 
+			$url = wp_nonce_url( $url, $this->prefix, $this->prefix );
+
 			if ( ! empty( $url ) ) {
+				parse_str( parse_url( $url, PHP_URL_QUERY ), $query );
+				set_transient( $query[$this->prefix], $result['flamingo_inbound_id'], MINUTE_IN_SECONDS );
+
 				wp_safe_redirect( esc_url_raw( $url, array( 'http', 'https' ) ), 302 );
 				exit;
 			}
 		}, 9999 );
-	}
-
-	public function wp_footer()
-	{
-		//TODO: 全ページのLPタグ設置
-
-
-		//TODO: コンバージョンページのタグ設定
-
 	}
 }
