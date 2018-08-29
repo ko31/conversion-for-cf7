@@ -54,7 +54,7 @@ final class Admin
         add_settings_section(
             'basic_settings',
             __( 'Basic settings', 'tsad-for-cf7' ),
-            array( $this, 'basic_section_callback' ),
+            null,
             $this->prefix
         );
 
@@ -78,7 +78,7 @@ final class Admin
         add_settings_section(
             'a8_settings',
             __( 'A8 settings', 'tsad-for-cf7' ),
-            array( $this, 'a8_section_callback' ),
+            null,
             $this->prefix
         );
 
@@ -114,11 +114,6 @@ final class Admin
 
 	}
 
-	public function basic_section_callback()
-	{
-        echo '<p>' . __( 'This is basic settings', 'tsad-for-cf7' ) . '</p>';
-    }
-
 	public function contact_posts_callback()
 	{
         $contact_posts = isset( $this->options['contact_posts'] ) ? $this->options['contact_posts'] : '';
@@ -133,11 +128,6 @@ final class Admin
 		?>
 		<input name="<?php echo $this->prefix;?>[conversion_posts]" type="text" id="conversion_posts" value="<?php echo $conversion_posts;?>" class="regular-text">
 		<?php
-    }
-
-	public function a8_section_callback()
-	{
-        echo '<p>' . __( 'This is settings for A8.net', 'tsad-for-cf7' ) . '</p>';
     }
 
 	public function a8_is_available_callback()
