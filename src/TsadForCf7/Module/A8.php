@@ -41,11 +41,9 @@ final class A8
 			 echo $this->options['a8_landing_code'];
 		}
 
-		if ( ! isset( $_GET[$this->prefix] ) || ! wp_verify_nonce( $_GET[$this->prefix], $this->prefix ) ) {
-			return;
+		if ( isset( $_GET[$this->prefix] ) && wp_verify_nonce( $_GET[$this->prefix], $this->prefix ) ) {
+			echo $this->get_conversion_code();
 		}
-
-		echo $this->get_conversion_code();
 	}
 
 	public function is_conversion()
