@@ -1,11 +1,11 @@
 <?php
 
-namespace TsadForCf7;
+namespace ConversionForCf7;
 
 /**
  * Customize the  admin screen.
  *
- * @package TsadForCf7
+ * @package ConversionForCf7
  */
 final class Admin
 {
@@ -14,7 +14,7 @@ final class Admin
 
 	public function __construct()
 	{
-		$this->prefix = \TsadForCf7::get_instance()->get_prefix();
+		$this->prefix = \ConversionForCf7::get_instance()->get_prefix();
 	}
 
 	public static function get_instance()
@@ -35,8 +35,8 @@ final class Admin
 	public function admin_menu()
 	{
         add_options_page(
-			__( 'Tsad for Contact Form 7', 'tsad-for-cf7' ),
-			__( 'Tsad for Contact Form 7', 'tsad-for-cf7' ),
+			__( 'Conversion for Contact Form 7', 'conversion-for-cf7' ),
+			__( 'Conversion for Contact Form 7', 'conversion-for-cf7' ),
             'manage_options',
 			$this->prefix,
             array( $this, 'options_page' )
@@ -53,14 +53,14 @@ final class Admin
 		// Basic
         add_settings_section(
             'basic_settings',
-            __( 'Basic settings', 'tsad-for-cf7' ),
+            __( 'Basic settings', 'conversion-for-cf7' ),
             null,
             $this->prefix
         );
 
         add_settings_field(
             'contact_posts',
-            __( 'Contact post id', 'tsad-for-cf7' ),
+            __( 'Contact post id', 'conversion-for-cf7' ),
             array( $this, 'contact_posts_callback' ),
             $this->prefix,
             'basic_settings'
@@ -68,7 +68,7 @@ final class Admin
 
         add_settings_field(
             'conversion_posts',
-            __( 'Conversion post id', 'tsad-for-cf7' ),
+            __( 'Conversion post id', 'conversion-for-cf7' ),
             array( $this, 'conversion_posts_callback' ),
             $this->prefix,
             'basic_settings'
@@ -77,14 +77,14 @@ final class Admin
 		// A8
         add_settings_section(
             'a8_settings',
-            __( 'A8 settings', 'tsad-for-cf7' ),
+            __( 'A8 settings', 'conversion-for-cf7' ),
             null,
             $this->prefix
         );
 
         add_settings_field(
             'is_available',
-            __( 'Availability', 'tsad-for-cf7' ),
+            __( 'Availability', 'conversion-for-cf7' ),
             array( $this, 'a8_is_available_callback' ),
             $this->prefix,
             'a8_settings'
@@ -92,7 +92,7 @@ final class Admin
 
         add_settings_field(
             'landing_code',
-            __( 'Landing page code', 'tsad-for-cf7' ),
+            __( 'Landing page code', 'conversion-for-cf7' ),
             array( $this, 'a8_landing_code_callback' ),
             $this->prefix,
             'a8_settings'
@@ -100,7 +100,7 @@ final class Admin
 
         add_settings_field(
             'conversion_code',
-            __( 'Conversion page code', 'tsad-for-cf7' ),
+            __( 'Conversion page code', 'conversion-for-cf7' ),
             array( $this, 'a8_conversion_code_callback' ),
             $this->prefix,
             'a8_settings'
@@ -136,7 +136,7 @@ final class Admin
 		?>
 		<label for="is_available">
 		<input name="<?php echo $this->prefix;?>[a8_is_available]" type="checkbox" id="is_available" value="1" <?php checked( '1', $a8_is_available ); ?> />
-		<?php _e( 'Can available', 'tsad-for-cf7' ); ?></label>
+		<?php _e( 'Can available', 'conversion-for-cf7' ); ?></label>
 		<?php
     }
 
@@ -157,7 +157,7 @@ final class Admin
 		</p>
 		<p class="description">
 			<code>[serial_number]</code>
-			<?php _e( ':Serial_number of Flamingo', 'tsad-for-cf7' ); ?>
+			<?php _e( ':Serial_number of Flamingo', 'conversion-for-cf7' ); ?>
 		</p>
 		<?php
     }
@@ -167,8 +167,8 @@ final class Admin
 		$action = untrailingslashit( admin_url() ) . '/options.php';
         $this->options = get_option( $this->prefix );
 ?>
-		<div class="wrap tsad-for-cf7-settings">
-			<h1 class="wp-heading-inline"><?php _e( 'Tsad For Contact Form 7', 'tsad-for-cf7' ); ?></h1>
+		<div class="wrap conversion-for-cf7-settings">
+			<h1 class="wp-heading-inline"><?php _e( 'Conversion For Contact Form 7', 'conversion-for-cf7' ); ?></h1>
 			<form action="<?php echo esc_url( $action ); ?>" method="post">
 <?php
 			settings_fields( $this->prefix );

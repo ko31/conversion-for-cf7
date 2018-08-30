@@ -1,11 +1,11 @@
 <?php
 
-namespace TsadForCf7\Module;
+namespace ConversionForCf7\Module;
 
 /**
  * Customize the action.
  *
- * @package TsadForCf7
+ * @package ConversionForCf7
  */
 final class A8
 {
@@ -14,7 +14,7 @@ final class A8
 
 	public function __construct()
 	{
-		$this->prefix = \TsadForCf7::get_instance()->get_prefix();
+		$this->prefix = \ConversionForCf7::get_instance()->get_prefix();
 	}
 
 	public static function get_instance()

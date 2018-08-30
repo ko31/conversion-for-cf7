@@ -1,11 +1,11 @@
 <?php
 
-namespace TsadForCf7;
+namespace ConversionForCf7;
 
 /**
  * Customize the action.
  *
- * @package TsadForCf7
+ * @package ConversionForCf7
  */
 final class Action
 {
@@ -14,7 +14,7 @@ final class Action
 
 	public function __construct()
 	{
-		$this->prefix = \TsadForCf7::get_instance()->get_prefix();
+		$this->prefix = \ConversionForCf7::get_instance()->get_prefix();
 	}
 
 	public static function get_instance()
@@ -72,7 +72,7 @@ final class Action
 			 *
 			 * @param string $url
 			 */
-			$url = apply_filters( 'tsad_form_cf7_conversion_url', $url );
+			$url = apply_filters( 'conversion_form_cf7_conversion_url', $url );
 
 			$url = wp_nonce_url( $url, $this->prefix, $this->prefix );
 

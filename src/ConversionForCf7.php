@@ -1,8 +1,8 @@
 <?php
 
-class TsadForCf7
+class ConversionForCf7
 {
-	private $prefix = 'tsad-for-cf7';
+	private $prefix = 'conversion-for-cf7';
 
 	public function __construct() {
 	}
@@ -11,7 +11,7 @@ class TsadForCf7
 	{
 		static $instance;
 		if ( ! $instance ) {
-			$instance = new TsadForCf7();
+			$instance = new ConversionForCf7();
 		}
 		return $instance;
 	}
@@ -23,12 +23,12 @@ class TsadForCf7
 
 	public function plugins_loaded()
 	{
-		load_plugin_textdomain( $this->get_prefix(), false, 'tsad-for-cf7/languages' );
+		load_plugin_textdomain( $this->get_prefix(), false, 'conversion-for-cf7/languages' );
 		if ( is_admin() ) {
-			TsadForCf7\Admin::get_instance()->register();
+			ConversionForCf7\Admin::get_instance()->register();
 		} else {
-			TsadForCf7\Action::get_instance()->register();
-			TsadForCf7\Module\A8::get_instance()->register();
+			ConversionForCf7\Action::get_instance()->register();
+			ConversionForCf7\Module\A8::get_instance()->register();
 		}
 	}
 
