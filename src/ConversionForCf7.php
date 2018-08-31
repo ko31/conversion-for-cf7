@@ -21,6 +21,7 @@ class ConversionForCf7 extends Singleton
 			ConversionForCf7\Action::get_instance()->register();
 			ConversionForCf7\Module\A8::get_instance()->response();
 			ConversionForCf7\Module\Moshimo::get_instance()->response();
+			ConversionForCf7\Module\Yahoo::get_instance()->response();
 		}
 	}
 

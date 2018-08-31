@@ -124,6 +124,30 @@ class Admin extends Singleton
 
 		// TODO:フェルマ
 
+		// Yahoo!スポンサードサーチ
+        add_settings_section(
+            'yahoo_settings',
+            __( 'Yahoo sponsored search settings', 'conversion-for-cf7' ),
+            null,
+            $this->prefix
+        );
+
+        add_settings_field(
+            'is_available',
+            __( 'Availability', 'conversion-for-cf7' ),
+            array( $this, 'yahoo_is_available_callback' ),
+            $this->prefix,
+            'yahoo_settings'
+        );
+
+        add_settings_field(
+            'conversion_code',
+            __( 'Conversion page code', 'conversion-for-cf7' ),
+            array( $this, 'yahoo_conversion_code_callback' ),
+            $this->prefix,
+            'yahoo_settings'
+        );
+
 		// TODO:アンガス
 
 	}
@@ -192,6 +216,30 @@ class Admin extends Singleton
 		?>
 		<p>
 			<textarea name="<?php echo $this->prefix;?>[moshimo_conversion_code]" rows="10" cols="50" id="moshimo_conversion_code" class="large-text"><?php echo $moshimo_conversion_code;?></textarea>
+		</p>
+		<p class="description">
+			<code>[serial_number]</code>
+			<?php _e( ':Serial_number of Flamingo', 'conversion-for-cf7' ); ?>
+		</p>
+		<?php
+    }
+
+	public function yahoo_is_available_callback()
+	{
+        $yahoo_is_available = isset( $this->options['yahoo_is_available'] ) ? $this->options['yahoo_is_available'] : '';
+		?>
+		<label for="yahoo_is_available">
+		<input name="<?php echo $this->prefix;?>[yahoo_is_available]" type="checkbox" id="yahoo_is_available" value="1" <?php checked( '1', $yahoo_is_available ); ?> />
+		<?php _e( 'Can available', 'conversion-for-cf7' ); ?></label>
+		<?php
+    }
+
+	public function yahoo_conversion_code_callback()
+	{
+        $yahoo_conversion_code = isset( $this->options['yahoo_conversion_code'] ) ? $this->options['yahoo_conversion_code'] : '';
+		?>
+		<p>
+			<textarea name="<?php echo $this->prefix;?>[yahoo_conversion_code]" rows="10" cols="50" id="yahoo_conversion_code" class="large-text"><?php echo $yahoo_conversion_code;?></textarea>
 		</p>
 		<p class="description">
 			<code>[serial_number]</code>
