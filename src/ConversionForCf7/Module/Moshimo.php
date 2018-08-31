@@ -9,7 +9,7 @@ use ConversionForCf7\Pattern\Singleton;
  *
  * @package ConversionForCf7
  */
-class A8 extends Singleton
+class Moshimo extends Singleton
 {
 	private $prefix;
     private $options;
@@ -22,34 +22,24 @@ class A8 extends Singleton
 	{
         $this->options = get_option( $this->prefix );
 
-		if ( ! empty( $this->options['a8_is_available'] ) ) {
-			add_action( 'wp_footer', array( $this, 'wp_footer' ) );
+		if ( ! empty( $this->options['moshimo_is_available'] ) ) {
+			add_filter( 'the_content', array( $this, 'the_content' ) );
 		}
 	}
 
-	public function wp_footer()
+	public function the_content( $content )
 	{
-		if ( ! $this->is_conversion() && ! empty( $this->options['a8_landing_code'] ) ) {
-			 echo $this->options['a8_landing_code'];
-		}
-
 		if ( isset( $_GET[$this->prefix] ) && wp_verify_nonce( $_GET[$this->prefix], $this->prefix ) ) {
-			echo $this->get_conversion_code();
-		}
-	}
-
-	public function is_conversion()
-	{
-		if ( empty( $this->options['conversion_posts'] ) ) {
-			return false;
+			$conversion_code = $this->get_conversion_code();
+			$content = $conversion_code . $content;
 		}
 
-		return ( $this->options['conversion_posts'] == get_the_ID() );
+		return $content;
 	}
 
 	public function get_conversion_code()
 	{
-		if ( empty( $this->options['a8_conversion_code'] ) ) {
+		if ( empty( $this->options['moshimo_conversion_code'] ) ) {
 			return '';
 		}
 
@@ -62,8 +52,8 @@ class A8 extends Singleton
 			}
 		}
 
-		$a8_conversion_code = str_replace( '[serial_number]', $serial_number, $this->options['a8_conversion_code'] );
+		$moshimo_conversion_code = str_replace( '[serial_number]', $serial_number, $this->options['moshimo_conversion_code'] );
 
-		return $a8_conversion_code;
+		return $moshimo_conversion_code;
 	}
 }

@@ -2,28 +2,20 @@
 
 namespace ConversionForCf7;
 
+use ConversionForCf7\Pattern\Singleton;
+
 /**
  * Customize the  admin screen.
  *
  * @package ConversionForCf7
  */
-final class Admin
+class Admin extends Singleton
 {
 	private $prefix;
     private $options;
 
-	public function __construct()
-	{
+	protected function on_construct() {
 		$this->prefix = \ConversionForCf7::get_instance()->get_prefix();
-	}
-
-	public static function get_instance()
-	{
-		static $instance;
-		if ( ! $instance ) {
-			$instance = new Admin();
-		}
-		return $instance;
 	}
 
 	public function register()
@@ -106,7 +98,29 @@ final class Admin
             'a8_settings'
         );
 
-		// TODO:もしも
+		// もしも
+        add_settings_section(
+            'moshimo_settings',
+            __( 'Moshimo settings', 'conversion-for-cf7' ),
+            null,
+            $this->prefix
+        );
+
+        add_settings_field(
+            'is_available',
+            __( 'Availability', 'conversion-for-cf7' ),
+            array( $this, 'moshimo_is_available_callback' ),
+            $this->prefix,
+            'moshimo_settings'
+        );
+
+        add_settings_field(
+            'conversion_code',
+            __( 'Conversion page code', 'conversion-for-cf7' ),
+            array( $this, 'moshimo_conversion_code_callback' ),
+            $this->prefix,
+            'moshimo_settings'
+        );
 
 		// TODO:フェルマ
 
@@ -134,8 +148,8 @@ final class Admin
 	{
         $a8_is_available = isset( $this->options['a8_is_available'] ) ? $this->options['a8_is_available'] : '';
 		?>
-		<label for="is_available">
-		<input name="<?php echo $this->prefix;?>[a8_is_available]" type="checkbox" id="is_available" value="1" <?php checked( '1', $a8_is_available ); ?> />
+		<label for="a8_is_available">
+		<input name="<?php echo $this->prefix;?>[a8_is_available]" type="checkbox" id="a8_is_available" value="1" <?php checked( '1', $a8_is_available ); ?> />
 		<?php _e( 'Can available', 'conversion-for-cf7' ); ?></label>
 		<?php
     }
@@ -154,6 +168,30 @@ final class Admin
 		?>
 		<p>
 			<textarea name="<?php echo $this->prefix;?>[a8_conversion_code]" rows="10" cols="50" id="a8_conversion_code" class="large-text"><?php echo $a8_conversion_code;?></textarea>
+		</p>
+		<p class="description">
+			<code>[serial_number]</code>
+			<?php _e( ':Serial_number of Flamingo', 'conversion-for-cf7' ); ?>
+		</p>
+		<?php
+    }
+
+	public function moshimo_is_available_callback()
+	{
+        $moshimo_is_available = isset( $this->options['moshimo_is_available'] ) ? $this->options['moshimo_is_available'] : '';
+		?>
+		<label for="moshimo_is_available">
+		<input name="<?php echo $this->prefix;?>[moshimo_is_available]" type="checkbox" id="moshimo_is_available" value="1" <?php checked( '1', $moshimo_is_available ); ?> />
+		<?php _e( 'Can available', 'conversion-for-cf7' ); ?></label>
+		<?php
+    }
+
+	public function moshimo_conversion_code_callback()
+	{
+        $moshimo_conversion_code = isset( $this->options['moshimo_conversion_code'] ) ? $this->options['moshimo_conversion_code'] : '';
+		?>
+		<p>
+			<textarea name="<?php echo $this->prefix;?>[moshimo_conversion_code]" rows="10" cols="50" id="moshimo_conversion_code" class="large-text"><?php echo $moshimo_conversion_code;?></textarea>
 		</p>
 		<p class="description">
 			<code>[serial_number]</code>

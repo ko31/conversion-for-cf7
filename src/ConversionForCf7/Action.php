@@ -2,28 +2,20 @@
 
 namespace ConversionForCf7;
 
+use ConversionForCf7\Pattern\Singleton;
+
 /**
  * Customize the action.
  *
  * @package ConversionForCf7
  */
-final class Action
+class Action extends Singleton
 {
 	private $prefix;
     private $options;
 
-	public function __construct()
-	{
+	protected function on_construct() {
 		$this->prefix = \ConversionForCf7::get_instance()->get_prefix();
-	}
-
-	public static function get_instance()
-	{
-		static $instance;
-		if ( ! $instance ) {
-			$instance = new Action();
-		}
-		return $instance;
 	}
 
 	public function register()
