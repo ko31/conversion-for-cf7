@@ -9,7 +9,7 @@ use ConversionForCf7\Pattern\Singleton;
  *
  * @package ConversionForCf7
  */
-class A8 extends Singleton
+class Felmat extends Singleton
 {
 	private $prefix;
     private $options;
@@ -22,7 +22,7 @@ class A8 extends Singleton
 	{
         $this->options = get_option( $this->prefix );
 
-		if ( ! empty( $this->options['a8_is_available'] ) ) {
+		if ( ! empty( $this->options['felmat_is_available'] ) ) {
 			add_action( 'wp_footer', array( $this, 'wp_footer' ) );
 		}
 	}
@@ -49,16 +49,16 @@ class A8 extends Singleton
 
 	public function get_landing_code()
 	{
-		if ( empty( $this->options['a8_landing_code'] ) ) {
+		if ( empty( $this->options['felmat_landing_code'] ) ) {
 			return '';
 		}
 
-		return $this->options['a8_landing_code'];
+		return $this->options['felmat_landing_code'];
 	}
 
 	public function get_conversion_code()
 	{
-		if ( empty( $this->options['a8_conversion_code'] ) ) {
+		if ( empty( $this->options['felmat_conversion_code'] ) ) {
 			return '';
 		}
 
@@ -71,8 +71,8 @@ class A8 extends Singleton
 			}
 		}
 
-		$a8_conversion_code = str_replace( '[serial_number]', $serial_number, $this->options['a8_conversion_code'] );
+		$felmat_conversion_code = str_replace( '[serial_number]', $serial_number, $this->options['felmat_conversion_code'] );
 
-		return $a8_conversion_code;
+		return $felmat_conversion_code;
 	}
 }

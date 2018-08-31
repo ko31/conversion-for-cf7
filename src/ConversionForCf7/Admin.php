@@ -122,7 +122,37 @@ class Admin extends Singleton
             'moshimo_settings'
         );
 
-		// TODO:フェルマ
+		// フェルマ
+        add_settings_section(
+            'felmat_settings',
+            __( 'Felmat settings', 'conversion-for-cf7' ),
+            null,
+            $this->prefix
+        );
+
+        add_settings_field(
+            'is_available',
+            __( 'Availability', 'conversion-for-cf7' ),
+            array( $this, 'felmat_is_available_callback' ),
+            $this->prefix,
+            'felmat_settings'
+        );
+
+        add_settings_field(
+            'landing_code',
+            __( 'Landing page code', 'conversion-for-cf7' ),
+            array( $this, 'felmat_landing_code_callback' ),
+            $this->prefix,
+            'felmat_settings'
+        );
+
+        add_settings_field(
+            'conversion_code',
+            __( 'Conversion page code', 'conversion-for-cf7' ),
+            array( $this, 'felmat_conversion_code_callback' ),
+            $this->prefix,
+            'felmat_settings'
+        );
 
 		// Yahoo!スポンサードサーチ
         add_settings_section(
@@ -216,6 +246,38 @@ class Admin extends Singleton
 		?>
 		<p>
 			<textarea name="<?php echo $this->prefix;?>[moshimo_conversion_code]" rows="10" cols="50" id="moshimo_conversion_code" class="large-text"><?php echo $moshimo_conversion_code;?></textarea>
+		</p>
+		<p class="description">
+			<code>[serial_number]</code>
+			<?php _e( ':Serial_number of Flamingo', 'conversion-for-cf7' ); ?>
+		</p>
+		<?php
+    }
+
+	public function felmat_is_available_callback()
+	{
+        $felmat_is_available = isset( $this->options['felmat_is_available'] ) ? $this->options['felmat_is_available'] : '';
+		?>
+		<label for="felmat_is_available">
+		<input name="<?php echo $this->prefix;?>[felmat_is_available]" type="checkbox" id="felmat_is_available" value="1" <?php checked( '1', $felmat_is_available ); ?> />
+		<?php _e( 'Can available', 'conversion-for-cf7' ); ?></label>
+		<?php
+    }
+
+	public function felmat_landing_code_callback()
+	{
+        $felmat_landing_code = isset( $this->options['felmat_landing_code'] ) ? $this->options['felmat_landing_code'] : '';
+		?>
+		<textarea name="<?php echo $this->prefix;?>[felmat_landing_code]" rows="10" cols="50" id="felmat_landing_code" class="large-text"><?php echo $felmat_landing_code;?></textarea>
+		<?php
+    }
+
+	public function felmat_conversion_code_callback()
+	{
+        $felmat_conversion_code = isset( $this->options['felmat_conversion_code'] ) ? $this->options['felmat_conversion_code'] : '';
+		?>
+		<p>
+			<textarea name="<?php echo $this->prefix;?>[felmat_conversion_code]" rows="10" cols="50" id="felmat_conversion_code" class="large-text"><?php echo $felmat_conversion_code;?></textarea>
 		</p>
 		<p class="description">
 			<code>[serial_number]</code>
