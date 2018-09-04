@@ -178,8 +178,29 @@ class Admin extends Singleton
             'yahoo_settings'
         );
 
-		// TODO:アンガス
+		// アンダス
+        add_settings_section(
+            'andus_settings',
+            __( 'Andus settings', 'conversion-for-cf7' ),
+            null,
+            $this->prefix
+        );
 
+        add_settings_field(
+            'is_available',
+            __( 'Availability', 'conversion-for-cf7' ),
+            array( $this, 'andus_is_available_callback' ),
+            $this->prefix,
+            'andus_settings'
+        );
+
+        add_settings_field(
+            'landing_code',
+            __( 'Landing page code', 'conversion-for-cf7' ),
+            array( $this, 'andus_landing_code_callback' ),
+            $this->prefix,
+            'andus_settings'
+        );
 	}
 
 	public function contact_posts_callback()
@@ -307,6 +328,24 @@ class Admin extends Singleton
 			<code>[serial_number]</code>
 			<?php _e( ':Serial_number of Flamingo', 'conversion-for-cf7' ); ?>
 		</p>
+		<?php
+    }
+
+	public function andus_is_available_callback()
+	{
+        $andus_is_available = isset( $this->options['andus_is_available'] ) ? $this->options['andus_is_available'] : '';
+		?>
+		<label for="andus_is_available">
+		<input name="<?php echo $this->prefix;?>[andus_is_available]" type="checkbox" id="andus_is_available" value="1" <?php checked( '1', $andus_is_available ); ?> />
+		<?php _e( 'Can available', 'conversion-for-cf7' ); ?></label>
+		<?php
+    }
+
+	public function andus_landing_code_callback()
+	{
+        $andus_landing_code = isset( $this->options['andus_landing_code'] ) ? $this->options['andus_landing_code'] : '';
+		?>
+		<textarea name="<?php echo $this->prefix;?>[andus_landing_code]" rows="10" cols="50" id="andus_landing_code" class="large-text"><?php echo $andus_landing_code;?></textarea>
 		<?php
     }
 

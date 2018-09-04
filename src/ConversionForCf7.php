@@ -23,6 +23,7 @@ class ConversionForCf7 extends Singleton
 			ConversionForCf7\Module\Moshimo::get_instance()->response();
 			ConversionForCf7\Module\Felmat::get_instance()->response();
 			ConversionForCf7\Module\Yahoo::get_instance()->response();
+			ConversionForCf7\Module\Andus::get_instance()->response();
 		}
 	}
 
