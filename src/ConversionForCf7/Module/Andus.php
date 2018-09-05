@@ -24,7 +24,6 @@ class Andus extends Singleton
 
 		if ( ! empty( $this->options['andus_is_available'] ) ) {
 			add_action( 'wp_head', array( $this, 'wp_head' ) );
-			add_action( 'wp_footer', array( $this, 'wp_footer' ) );
 		}
 	}
 
