@@ -16,12 +16,11 @@ class Andus extends Singleton
 
 	protected function on_construct() {
 		$this->prefix = \ConversionForCf7::get_instance()->get_prefix();
+        $this->options = get_option( $this->prefix );
 	}
 
 	public function response()
 	{
-        $this->options = get_option( $this->prefix );
-
 		if ( ! empty( $this->options['andus_is_available'] ) ) {
 			add_action( 'wp_head', array( $this, 'wp_head' ) );
 		}
@@ -39,5 +38,10 @@ class Andus extends Singleton
 		}
 
 		return $this->options['andus_landing_code'];
+	}
+
+	public function is_available()
+	{
+		return ( ! empty( $this->options['andus_is_available'] ) );
 	}
 }
